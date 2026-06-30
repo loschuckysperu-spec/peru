@@ -1,0 +1,12 @@
+{
+  "name": "panel-imagenes-vercel",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Panel para crear, reemplazar y eliminar pares de imágenes con Cloudinary y MongoDB Atlas.",
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "mongodb": "6.17.0"
+  }
+}
