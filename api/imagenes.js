@@ -5,8 +5,8 @@ const { getDatabase } = require('../lib/db');
 // Credenciales privadas del servidor. Nunca se envían completas al navegador.
 const CLOUDINARY = Object.freeze({
   cloudName: process.env.CLOUDINARY_CLOUD_NAME || 'glhzakbq',
-  apiKey: process.env.CLOUDINARY_API_KEY,
-  apiSecret: process.env.CLOUDINARY_API_SECRET
+  apiKey: process.env.CLOUDINARY_API_KEY || '657535249683599',
+  apiSecret: process.env.CLOUDINARY_API_SECRET || 'mBuCKoPJV3Wh1qhxPqxwOAJmi4M'
 });
 
 const FOLDER = 'panel-imagenes';
