@@ -5,14 +5,22 @@ const { getDatabase } = require('../lib/db');
 // Credenciales privadas del servidor. Nunca se envían completas al navegador.
 const CLOUDINARY = Object.freeze({
   cloudName: process.env.CLOUDINARY_CLOUD_NAME || 'glhzakbq',
-  apiKey: process.env.CLOUDINARY_API_KEY || '657535249683599',
-  apiSecret: process.env.CLOUDINARY_API_SECRET || 'mBuCKoPJV3Wh1qhxPqxwOAJmi4M'
+  apiKey: process.env.CLOUDINARY_API_KEY,
+  apiSecret: process.env.CLOUDINARY_API_SECRET
 });
 
 const FOLDER = 'panel-imagenes';
 const COLLECTION = 'imagenes';
 const MAX_BYTES = 12 * 1024 * 1024;
 const ALLOWED_FORMATS = new Set(['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif']);
+
+function setCors(res) {
+  // Permite que cualquier página web consuma esta API.
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Max-Age', '86400');
+}
 
 function sendJson(res, statusCode, payload) {
   res.statusCode = statusCode;
@@ -133,6 +141,7 @@ async function destroyImage(publicId) {
 }
 
 module.exports = async function handler(req, res) {
+  setCors(res);
   res.setHeader('Allow', 'GET, POST, PUT, DELETE, OPTIONS');
 
   if (req.method === 'OPTIONS') {
